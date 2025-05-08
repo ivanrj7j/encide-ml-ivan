@@ -177,3 +177,5 @@ cython_debug/
 # Custom ignores:
 
 data/
+checkpoints/
+logs/
