@@ -1,4 +1,5 @@
 from torch import nn
+from torch import flatten
 
 class CatDogClassifierV1(nn.Module):
     def __init__(self, imgDim:int, processChannels:int, inputChannels:int=3, *args, **kwargs):
@@ -30,7 +31,7 @@ class CatDogClassifierV1(nn.Module):
         x = self.input(x)
         x = self.convs(x)
         x = self.output(x)
-        return x
+        return flatten(x)
     
 
 if __name__ == "__main__":
