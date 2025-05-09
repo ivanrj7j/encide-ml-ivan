@@ -1,6 +1,7 @@
 from src.train.config import *
 from src.models.CatDogClassifierV1 import CatDogClassifierV1
 from src.models.SimpleModel import CatsVsDogsV2
+from src.models.CatVsDogsV3 import CatsVsDogsV3
 from src.loaders.DataLoader import CatVsDogsDataset
 from torch.utils.data import DataLoader
 import torch
@@ -82,7 +83,7 @@ def train(model, train_loader, test_loader, device, epochs, criterion, optimizer
             logging.info(f"Model saved to {checkpointPath}")
 
 if __name__ == "__main__":
-    model = CatsVsDogsV2().to(DEVICE)
+    model = CatsVsDogsV3().to(DEVICE)
     train_loader = DataLoader(CatVsDogsDataset(TRAIN_PATH, IMAGE_DIM), TRAIN_BATCH_SIZE, True)
     test_loader = DataLoader(CatVsDogsDataset(TEST_PATH, IMAGE_DIM), TEST_BATCH_SIZE, True)
     

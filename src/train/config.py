@@ -8,7 +8,7 @@ TRAIN_PATH = os.path.join(DATA_PATH, 'train')
 TEST_PATH = os.path.join(DATA_PATH, 'test')
 # paths 
 
-IMAGE_DIM = 96
+IMAGE_DIM = 128
 PROCESS_CHANNELS = 32
 # model configuration 
 
