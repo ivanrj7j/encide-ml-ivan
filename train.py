@@ -1,5 +1,6 @@
 from src.train.config import *
 from src.models.CatDogClassifierV1 import CatDogClassifierV1
+from src.models.SimpleModel import CatsVsDogsV2
 from src.loaders.DataLoader import CatVsDogsDataset
 from torch.utils.data import DataLoader
 import torch
@@ -75,8 +76,13 @@ def train(model, train_loader, test_loader, device, epochs, criterion, optimizer
         logging.info(f"Test - Loss: {test_loss:.4f}, Accuracy: {test_accuracy:.2f}%")
         print(f"Epoch {epoch+1}/{epochs} - Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.2f}%")
 
+        if (epoch+1) % CHECKPOINT_EVERY == 0:
+            checkpointPath = os.path.join("checkpoints", f"{TRAINING_ID}_{epoch}.pth")
+            torch.save(model.state_dict(), checkpointPath)
+            logging.info(f"Model saved to {checkpointPath}")
+
 if __name__ == "__main__":
-    model = CatDogClassifierV1().to(DEVICE)
+    model = CatsVsDogsV2().to(DEVICE)
     train_loader = DataLoader(CatVsDogsDataset(TRAIN_PATH, IMAGE_DIM), TRAIN_BATCH_SIZE, True)
     test_loader = DataLoader(CatVsDogsDataset(TEST_PATH, IMAGE_DIM), TEST_BATCH_SIZE, True)
     
