@@ -11,8 +11,8 @@ class CatVsDogsDataset(Dataset):
             dataDir (str): Path to the directory containing the data.
         """
         self.dataDir = dataDir
-        catImages = list(map(lambda x: (os.path.join(dataDir, 'cats', x), 0), os.listdir(os.path.join(dataDir, 'cats'))))
-        dogImages = list(map(lambda x: (os.path.join(dataDir, 'dogs', x), 1), os.listdir(os.path.join(dataDir, 'dogs'))))
+        catImages = list(map(lambda x: (os.path.join(dataDir, 'cats', x), 0.0), os.listdir(os.path.join(dataDir, 'cats'))))
+        dogImages = list(map(lambda x: (os.path.join(dataDir, 'dogs', x), 1.0), os.listdir(os.path.join(dataDir, 'dogs'))))
         self.images = catImages + dogImages
         self.dim = dim
 

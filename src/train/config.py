@@ -18,7 +18,7 @@ CHECKPOINT_EVERY = 10
 # checkpoint every 10 epochs at the checkpoint directory
 
 DEVICE = 'cuda'
-TRAIN_BATCH_SIZE = 1024
+TRAIN_BATCH_SIZE = 128
 TEST_BATCH_SIZE = 16
-EPOCHS = 8
-LR = 4e-3
+EPOCHS = 50
+LR = 1e-3

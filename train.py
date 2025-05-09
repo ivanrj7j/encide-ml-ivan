@@ -36,7 +36,7 @@ def train(model, train_loader, test_loader, device, epochs, criterion, optimizer
         # Training loop with progress bar
         with tqdm(train_loader, desc=f"Epoch {epoch+1}/{epochs}", unit="batch") as pbar:
             for inputs, labels in pbar:
-                inputs, labels = inputs.to(device), labels.to(device).float()  # Convert labels to float
+                inputs, labels = inputs.to(device), torch.unsqueeze(labels, -1).to(device) # Convert labels to float
 
                 optimizer.zero_grad()
                 outputs = model(inputs)
@@ -62,7 +62,7 @@ def train(model, train_loader, test_loader, device, epochs, criterion, optimizer
         test_total = 0
         with torch.no_grad():
             for inputs, labels in test_loader:
-                inputs, labels = inputs.to(device), labels.to(device).float()  # Convert labels to float
+                inputs, labels = inputs.to(device), torch.unsqueeze(labels, -1).to(device)  # Convert labels to float
                 outputs = model(inputs)
                 loss = criterion(outputs, labels)
 
@@ -76,7 +76,7 @@ def train(model, train_loader, test_loader, device, epochs, criterion, optimizer
         print(f"Epoch {epoch+1}/{epochs} - Test Loss: {test_loss:.4f}, Test Accuracy: {test_accuracy:.2f}%")
 
 if __name__ == "__main__":
-    model = CatDogClassifierV1(IMAGE_DIM, PROCESS_CHANNELS).to(DEVICE)
+    model = CatDogClassifierV1().to(DEVICE)
     train_loader = DataLoader(CatVsDogsDataset(TRAIN_PATH, IMAGE_DIM), TRAIN_BATCH_SIZE, True)
     test_loader = DataLoader(CatVsDogsDataset(TEST_PATH, IMAGE_DIM), TEST_BATCH_SIZE, True)
     
